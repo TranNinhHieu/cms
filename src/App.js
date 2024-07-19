@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { Routes, Route } from 'react-router-dom'
+
+import { publicRoute } from './router'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<Routes>
+			{publicRoute.map((router) => {
+				const Layout = router.layout
+				const Page = router.component
+				return (
+					<Route
+						key={router.path}
+						path={router.path}
+						element={
+							<Layout>
+								<Page />
+							</Layout>
+						}
+					/>
+				)
+			})}
+		</Routes>
+	)
 }
 
-export default App;
+export default App
